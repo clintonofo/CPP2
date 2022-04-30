@@ -175,17 +175,55 @@ void Image::flipVertically() {
     }
 }
 
-void Image::AdditionalFunction2() {
 
-}
+
+
 
 void Image::AdditionalFunction3() {
 
 }
 
-void Image::AdditionalFunction1() {
 
-}
+    void Image::AdditionalFunction2()
+    {
+        // 90 degree turn clockwise
+
+        Image sideFlipped = Image(w,h);
+        for(int x= 0; x < h; ++x)
+        {
+            for(int y = 0; y < w; ++y)
+            {
+                unsigned int destination = (y * h) + (h - x - 1);
+                sideFlipped.pixels[destination] = pixels[(x * w) + y];
+            }
+        }
+        this = sideFlipped;
+    }
+    void Image::AdditionalFunction1()
+    {
+        //Rotate image 180
+        //Idea is that the array of pixels is reversed
+
+        int pixels[3];
+        unsigned int mirror;
+        unsigned int size = hw;
+        for(int i = 0; i < (size / 2); ++i)
+        {
+            mirror = size - i;
+
+            pixels[0] = this->pixels[i].r;
+            pixels[1] = this->pixels[i].g;
+            pixels[2] = this->pixels[i].b;
+
+            this->pixels[i] = this->pixels[mirror];
+
+            this->pixels[mirror].r = pixels[0];
+            this->pixels[mirror].g = pixels[1];
+            this->pixels[mirror].b = pixels[2];
+        }
+
+    }
+
 
 /* Functions used by the GUI - DO NOT MODIFY */
 int Image::getWidth() {
